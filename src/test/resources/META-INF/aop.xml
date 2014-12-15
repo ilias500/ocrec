@@ -1,0 +1,9 @@
+<aspectj>
+  <aspects>
+    <aspect name="com.github.talberto.ocrec.ExternalCacheInterceptor" />
+  </aspects>
+
+  <weaver options="-verbose -showWeaveInfo">
+    <include within="atg.adapter.gsa.*" />
+  </weaver>
+</aspectj> 

@@ -20,14 +20,14 @@ public aspect ExternalCacheInterceptor {
   
   before(): getExternalCacheManager() {
   	String timestamp = String.valueOf(System.currentTimeMillis());
-  	String filename = tempDir.getAbsolutePath() + File.pathSeparator + timestamp;
+  	String filename = tempDir.getAbsolutePath() + File.separator + timestamp + ".hprof";
   	System.out.println(filename);
   	HeapDumper.dumpHeap(filename, false);
   }
   
   before(GSAExternalCacheManager newvalue): setExternalCacheManager(newvalue) {
   	String timestamp = String.valueOf(System.currentTimeMillis());
-  	String filename = tempDir.getAbsolutePath() + File.pathSeparator + timestamp;
+  	String filename = tempDir.getAbsolutePath() + File.separator + timestamp + ".hprof";
   	System.out.println(filename);
   	HeapDumper.dumpHeap(filename, false);
   }
