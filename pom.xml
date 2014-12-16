@@ -59,8 +59,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <aspectj.runtime.version>1.8.0</aspectj.runtime.version>
-    <aspectj.plugin.version>1.5</aspectj.plugin.version>
+    <infinispan.version>7.0.2.Final</infinispan.version>
     <guava.version>16.0.1</guava.version>
     <junit.version>4.11</junit.version>
     <hamcrest.version>1.3</hamcrest.version>
@@ -81,8 +80,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven.surefire.version}</version>
           <configuration>
-            <argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.runtime.version}/aspectjweaver-${aspectj.runtime.version}.jar
-              -Duser.language=en -Duser.locale=US</argLine>
+            <argLine>-Duser.language=en -Duser.locale=US</argLine>
           </configuration>
         </plugin>
 
@@ -105,48 +103,6 @@
           <releaseProfiles>release</releaseProfiles>
           <goals>deploy</goals>
         </configuration>
-      </plugin>
-      <!-- AspectJ Plugin -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>aspectj-maven-plugin</artifactId>
-        <version>${aspectj.plugin.version}</version>
-        <configuration>
-          <complianceLevel>1.6</complianceLevel>
-          <includes>
-            <include>**/*.java</include>
-            <include>**/*.aj</include>
-          </includes>
-          <showWeaveInfo>true</showWeaveInfo>
-          <aspectDirectory>src/main/aspect</aspectDirectory>
-          <testAspectDirectory>src/test/aspect</testAspectDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>compile_with_aspectj</id>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>test-compile_with_aspectj</id>
-            <goals>
-              <goal>test-compile</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.runtime.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-            <version>${aspectj.runtime.version}</version>
-          </dependency>
-        </dependencies>
       </plugin>
     </plugins>
   </build>
@@ -172,7 +128,12 @@
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
-
+    <!-- Infinispan -->
+    <dependency>
+      <groupId>org.infinispan</groupId>
+      <artifactId>infinispan-embedded</artifactId>
+      <version>${infinispan.version}</version>
+    </dependency>
     <!-- ATG dependencies -->
     <dependency>
       <groupId>atg.platform</groupId>
@@ -239,22 +200,6 @@
       <artifactId>atgdust</artifactId>
       <version>${atgdust.version}</version>
       <scope>test</scope>
-    </dependency>
-    <!-- AspectJ Libraies -->
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>${aspectj.runtime.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>${aspectj.runtime.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjtools</artifactId>
-      <version>${aspectj.runtime.version}</version>
     </dependency>
   </dependencies>
 
